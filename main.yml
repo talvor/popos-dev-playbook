@@ -59,7 +59,18 @@
         - kubectl
         - k8s
 
+    - name: Install extra packages
+      import_tasks: tasks/extra-packages.yml
+      tags:
+        - packages
+
     - name: Install flatpaks
       import_tasks: tasks/flatpak.yml
       tags:
         - flatpak
+
+    - name: Install alacritty
+      import_tasks: tasks/alacritty.yml
+      tags:
+        - alacritty
+

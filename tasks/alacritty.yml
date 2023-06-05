@@ -1,0 +1,7 @@
+---
+- name: Install the alacritty package
+  ansible.builtin.package:
+    name: alacritty
+    state: present
+  become: yes
+

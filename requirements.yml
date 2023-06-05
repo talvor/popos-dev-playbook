@@ -1,0 +1,8 @@
+---
+roles:
+  - name: gantsign.antigen
+  - name: gantsign.antigen_bundles
+  - name: geerlingguy.docker
+
+collections:
+  - name: community.general

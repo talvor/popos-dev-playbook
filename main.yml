@@ -1,0 +1,65 @@
+---
+- hosts: all
+
+  vars_files:
+    - default.config.yml
+
+  pre_tasks:
+    - name: Include playbook configuration.
+      include_vars: "{{ item }}"
+      with_fileglob:
+        - "{{ playbook_dir }}/config.yml"
+      tags:
+        - always
+    - name: Set ansible_distribution to Ubuntu
+      set_fact: ansible_distribution="Ubuntu"
+      tags:
+        - always
+
+  roles:
+    - role: geerlingguy.docker
+      when: install_docker
+      become: true
+      tags:
+        - docker
+    - role: gantsign.antigen
+      when: install_zsh
+      become: true
+      users: "{{antigen_users}}"
+      tags:
+        - zsh
+        - antigen
+    - role: gantsign.antigen_bundles
+      when: install_zsh
+      become: true
+      users: "{{antigen_bundle_users}}"
+      tags:
+        - zsh
+        - antigen_bundles
+
+  tasks:
+    - name: Set .zshrc
+      import_tasks: tasks/zshrc.yml
+      when: configure_zshrc
+      tags:
+        - zshrc
+
+    - name: Install NVM
+      import_tasks: tasks/nvm.yml
+      when: install_nvm
+      tags:
+        - node
+        - nvm
+
+    - name: Install kubectl
+      import_tasks: tasks/kubectl.yml
+      when: install_kubectl
+      become: true
+      tags:
+        - kubectl
+        - k8s
+
+    - name: Install flatpaks
+      import_tasks: tasks/flatpak.yml
+      tags:
+        - flatpak

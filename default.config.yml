@@ -1,0 +1,39 @@
+---
+downloads: ~/.ansible-downloads/
+
+# Docker
+install_docker: false
+docker_compose_version: "1.28.0"
+docker_users: ["{{ ansible_env.USER }}"]
+
+# ZSH
+install_zsh: true
+antigen_users:
+  - username: "{{ ansible_env.USER }}"
+    antigen_libraries:
+      - name: oh-my-zsh
+    antigen_theme:
+      name: robbyrussell
+    antigen_bundles:
+      - name: command-not-found
+      - name: git
+      - name: nvm
+      - name: kubectl
+antigen_bundle_users:
+  - username: "{{ ansible_env.USER }}"
+    antigen_bundles:
+      - name: zsh-completions
+        url: zsh-users/zsh-completions
+      - name: zsh-autosuggestions
+        url: zsh-users/zsh-autosuggestions
+      - name: zsh-syntax-highlighting
+        url: zsh-users/zsh-syntax-highlighting
+
+configure_zshrc: true
+
+# K8s
+install_kubectl: true
+
+# Node
+install_nvm: true
+

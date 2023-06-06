@@ -87,3 +87,8 @@
       tags:
         - ssh
 
+    - name: Install gpg keys
+      import_tasks: tasks/gpg.yml
+      tags:
+        - gpg
+

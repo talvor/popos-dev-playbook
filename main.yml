@@ -1,6 +1,10 @@
 ---
 - hosts: all
 
+  vars:
+    local_home: "{{ lookup('env','HOME') }}"
+    local_user: "{{ lookup('env','USER') }}"
+
   vars_files:
     - default.config.yml
 
@@ -36,6 +40,10 @@
       tags:
         - zsh
         - antigen_bundles
+    - role: sicruse.powerline-fonts
+      when: install_powerline_fonts
+      tags:
+        - fonts
 
   tasks:
     - name: Set .zshrc
@@ -73,4 +81,9 @@
       import_tasks: tasks/alacritty.yml
       tags:
         - alacritty
+
+    - name: Install ssh keys
+      import_tasks: tasks/ssh.yml
+      tags:
+        - ssh
 

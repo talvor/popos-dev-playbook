@@ -40,3 +40,6 @@ compctl -K _complete_invoke + -f invoke inv
 
 # vim: set ft=sh :
 ###< Invoke autocomplete ###
+
+# Aliases
+alias code='flatpak run com.visualstudio.code &>/dev/null'

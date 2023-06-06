@@ -9,11 +9,6 @@
     file: files/ssh_key_vault.yml
   when: not check_ssh_key.stat.exists
 
-- name: Decode SSH Key
-  shell: echo {{ssh_private_key}} |base64 --decode
-  register: ssh_private_key_decoded
-  when: not check_ssh_key.stat.exists
-
 - name: Create id_ed25519 file
   template:
     src: templates/ssh/id_ed25519.t2

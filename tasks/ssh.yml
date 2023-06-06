@@ -31,3 +31,7 @@
     group: "{{local_user}}"
     mode: '0644'
   when: not check_ssh_key.stat.exists
+
+- name: Register SSH Key
+  shell: ssh-add "{{local_home}}/.ssh/id_ed25519"
+  when: not check_ssh_key.stat.exists

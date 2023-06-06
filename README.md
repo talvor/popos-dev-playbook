@@ -21,7 +21,7 @@ export PATH=$PATH:~/.local/bin
 Download or clone this repository to your local drive.
 
 ```console
-git clone https://github.com/crbanman/popos-dev-playbook.git
+git clone https://github.com/talvor/popos-dev-playbook.git
 cd popos-dev-playbook
 ```
 
@@ -38,7 +38,7 @@ ansible-galaxy install -r requirements.yml
 1. Run the playbook with the command and enter your user account password when prompted:
 
    ```console
-   ansible-playbook main.yml --ask-become-pass
+   ansible-playbook main.yml --ask-become-pass --ask-vault-pass
    ```
 
 1. Restart your machine.
@@ -64,82 +64,6 @@ Yarn can be installed once npm (from setting the node version).
 npm install --global yarn
 ```
 
-### Register SSH Keys
-
-Add ssh keys. For better or worse I backup my keys, so I need to copy them to `~/.ssh/` and add them to the `ssh-agent`.
-
-1. Set the the appropriate file permissions for each key:
-
-   ```command
-   chmod 400 ~/.ssh/id_ed25519
-   ```
-
-1. Start the ssh agent
-
-    ```command
-    eval "$(ssh-agent -s)"
-    ```
-
-1. For each key run `ssh-add`
-
-   ```command
-   ssh-add ~/.ssh/id_ed25519
-   ```
-
-### Run JetBrains Toolbox
-
-Toolbox needs to be run once from the command line so the system can register the AppImage.
-
-```command
-/opt/jetbrains-toolbox
-```
-
-### Docker registry cache
-
-Add docker image caching to avoid hitting the docker pull limit.
-
-**Note: This solution is probably overkill, but I have run into the limit a couple of times in the past when working on some docker stuff. Just signing in to docker hub will double your pulls from 100 pull to 200 pulls every 6 hours.**
-
-1. Pull and run the registry image on port `6000`
-
-   ```console
-   docker run -d -p 6000:5000 \
-   -e REGISTRY_PROXY_REMOTEURL=https://registry-1.docker.io \
-   --restart always \
-   --name registry registry:2
-   ```
-
-   Note: This container will automatically restart when docker is restarted (i.e. system bootup)
-
-1. Create the file `/etc/docker/daemon.json`
-
-   ```json
-   {
-     "registry-mirrors": ["http://localhost:6000"]
-   }
-   ```
-
-1. Restart the docker service
-
-   ```console
-   sudo systemctl restart docker
-   ```
-
-1. Test that the mirror is working
-
-   1. Pull an image you don't already have locally
-      ```console
-      docker pull node
-      ```
-   1. Curl the local registry
-      ```console
-      curl http://localhost:6000/v2/_catalog
-      ```
-      Expected result:
-      ```console
-      {"repositories":["library/node"]}
-      ```
-
 ## Author
 
-This project was created by [Cody Banman](https://github.com/crbanman) (originally inspired by [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook) and [staticdev/linux-developer-playbook](https://github.com/staticdev/linux-developer-playbook))
+This project was created by [Phillip Hall](https://github.com/talvor) (originally inspired by [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook) and [staticdev/linux-developer-playbook](https://github.com/staticdev/linux-developer-playbook))

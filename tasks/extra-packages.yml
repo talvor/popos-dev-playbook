@@ -15,3 +15,11 @@
     version: "{{ item.version | default(omit) }}"
     executable: "{{ item.executable | default('pip3') }}"
   loop: "{{ pip_packages }}"
+
+- name: Install global DEB packages.
+  become: yes
+  become_user: root
+  apt:
+    deb: "{{ item.name | default(item) }}"
+    state: "{{ item.state | default('present') }}"
+  loop: "{{ deb_packages }}"

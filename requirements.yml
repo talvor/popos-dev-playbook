@@ -4,6 +4,7 @@ roles:
   - name: gantsign.antigen_bundles
   - name: geerlingguy.docker
   - name: sicruse.powerline-fonts
+  - name: ctorgalson.nerdfonts
 
 collections:
   - name: community.general

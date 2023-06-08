@@ -44,6 +44,10 @@
       when: install_powerline_fonts
       tags:
         - fonts
+    - role: ctorgalson.nerdfonts
+      when: install_nerd_fonts
+      tags:
+        - fonts
 
   tasks:
     - name: Set .zshrc
@@ -51,6 +55,7 @@
       when: configure_zshrc
       tags:
         - zshrc
+        - zsh
 
     - name: Install NVM
       import_tasks: tasks/nvm.yml

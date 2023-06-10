@@ -6,11 +6,7 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 # Setup starship
-export SPACESHIP_GIT_SYMBOL="🚀 "
-
-# Set Spaceship ZSH as a prompt
-autoload -U promptinit; promptinit
-prompt spaceship
+eval "$(starship init zsh)"
 
 # Aliases
 alias code='flatpak run com.visualstudio.code &>/dev/null'

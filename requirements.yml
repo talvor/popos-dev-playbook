@@ -5,6 +5,7 @@ roles:
   - name: geerlingguy.docker
   - name: sicruse.powerline-fonts
   - name: ctorgalson.nerdfonts
+  - name: andrewrothstein.starship
 
 collections:
   - name: community.general

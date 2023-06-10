@@ -1,0 +1,14 @@
+---
+- name: Check if distrobox is installed
+  command: which distrobox
+  changed_when: false
+  failed_when: distrobox_installed.rc not in [0,1]
+  register: distrobox_installed
+
+- name: Install distrobox
+  become: yes
+  become_user: root
+  shell: curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/install | sh
+  when: distrobox_installed.rc not in [ 0 ]
+
+

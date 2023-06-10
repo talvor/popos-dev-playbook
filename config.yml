@@ -1,0 +1,77 @@
+---
+downloads: ~/.ansible-downloads/
+
+# Docker
+install_docker: false
+docker_compose_version: "1.28.0"
+docker_users: ["{{ ansible_env.USER }}"]
+
+# ZSH
+install_zsh: true
+antigen_users:
+  - username: "{{ ansible_env.USER }}"
+    antigen_libraries:
+      - name: oh-my-zsh
+    antigen_theme:
+      name: robbyrussell
+    antigen_bundles:
+      - name: command-not-found
+      - name: git
+      - name: nvm
+      - name: kubectl
+antigen_bundle_users:
+  - username: "{{ ansible_env.USER }}"
+    antigen_bundles:
+      - name: zsh-completions
+        url: zsh-users/zsh-completions
+      - name: zsh-autosuggestions
+        url: zsh-users/zsh-autosuggestions
+      - name: zsh-syntax-highlighting
+        url: zsh-users/zsh-syntax-highlighting
+
+configure_zshrc: true
+
+install_starship: true
+
+# Powerline fonts
+install_powerline_fonts: true
+powerline_fonts:
+  - SourceCodePro
+
+# Nerd fonts
+install_nerd_fonts: true
+nf_user: "{{ ansible_env.USER }}"
+nf_group: "{{ nf_user }}"
+nf_single_fonts:
+  - "FiraCode/Regular/FiraCodeNerdFont-Regular.ttf"
+
+# K8s
+install_kubectl: true
+
+# Node
+install_nvm: true
+
+install_vscode: true
+
+# Install packages.
+flatpak_packages:
+  - name: com.visualstudio.code
+    state: present
+
+npm_packages: []
+
+pip_packages:
+  - name: psutil
+
+deb_packages:
+  - name: "https://github.com/twpayne/chezmoi/releases/download/v2.34.0/chezmoi_2.34.0_linux_amd64.deb"
+
+apt_packages:
+  - name: snapd
+  - name: neofetch
+  - name: docker.io
+
+snap_packages: []
+  # - name: distrobox
+  #   state: present
+  #   channel: stable

@@ -9,7 +9,12 @@ fi
 eval "$(starship init zsh)"
 
 # Aliases
-alias code='flatpak run com.visualstudio.code &>/dev/null'
+
+if command -v "distrobox" > /dev/null; then
+    alias code='flatpak run com.visualstudio.code &>/dev/null'
+else
+    alias code='distrobox-host-exec flatpak run com.visualstudio.code &>/dev/null'
+fi
 
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='nano'

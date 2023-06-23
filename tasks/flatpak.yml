@@ -1,7 +1,0 @@
----
-- name: Install flatpak packages.
-  flatpak:
-    name: "{{ item.name | default(item) }}"
-    state: "{{ item.state | default('present') }}"
-    method: user
-  loop: "{{ flatpak_packages }}"

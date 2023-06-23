@@ -1,0 +1,15 @@
+---
+# Install packages.
+flatpak_packages: []
+
+pip_packages: []
+
+deb_packages: []
+
+apt_packages:
+  - name: neofetch
+
+snap_packages: []
+  # - name: distrobox
+  #   state: present
+  #   channel: stable

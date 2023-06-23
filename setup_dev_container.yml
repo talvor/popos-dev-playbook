@@ -1,0 +1,29 @@
+---
+- hosts: all
+
+  vars:
+    local_home: "{{ lookup('env','HOME') }}"
+    local_user: "{{ lookup('env','USER') }}"
+
+  pre_tasks:
+    - name: Include playbook configuration.
+      include_vars: "{{ item }}"
+      with_fileglob:
+        - "{{ playbook_dir }}/config_dev_container.yml"
+      tags:
+        - always
+    - name: Set ansible_distribution to Ubuntu
+      set_fact: ansible_distribution="Ubuntu"
+      tags:
+        - always
+
+  roles:
+    - role: andrewrothstein.starship
+      tags:
+        - starship
+
+  tasks:
+    - name: Install packages
+      import_tasks: tasks/packages.yml
+      tags:
+        - packages

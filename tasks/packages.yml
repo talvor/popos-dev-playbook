@@ -1,0 +1,41 @@
+---
+- name: Install global APT packages.
+  become: yes
+  become_user: root
+  apt:
+    name: "{{ item.name | default(item) }}"
+    state: "{{ item.state | default('present') }}"
+  loop: "{{ apt_packages }}"
+
+- name: Install global DEB packages.
+  become: yes
+  become_user: root
+  apt:
+    deb: "{{ item.name | default(item) }}"
+    state: "{{ item.state | default('present') }}"
+  loop: "{{ deb_packages }}"
+
+- name: Install snap packages.
+  become: yes
+  become_user: root
+  snap:
+    name: "{{ item.name | default(item) }}"
+    state: "{{ item.state | default('present') }}"
+    channel: "{{ item.channel | default('stable') }}"
+    classic: "{{ item.classic | default('false') }}"
+  loop: "{{ snap_packages }}"
+
+- name: Install flatpak packages.
+  flatpak:
+    name: "{{ item.name | default(item) }}"
+    state: "{{ item.state | default('present') }}"
+    method: user
+  loop: "{{ flatpak_packages }}"
+
+- name: Install global Pip packages.
+  pip:
+    name: "{{ item.name | default(item) }}"
+    state: "{{ item.state | default('present') }}"
+    version: "{{ item.version | default(omit) }}"
+    executable: "{{ item.executable | default('pip3') }}"
+  loop: "{{ pip_packages }}"

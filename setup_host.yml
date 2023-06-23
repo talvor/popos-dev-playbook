@@ -5,14 +5,11 @@
     local_home: "{{ lookup('env','HOME') }}"
     local_user: "{{ lookup('env','USER') }}"
 
-  vars_files:
-    - default.config.yml
-
   pre_tasks:
     - name: Include playbook configuration.
       include_vars: "{{ item }}"
       with_fileglob:
-        - "{{ playbook_dir }}/config.yml"
+        - "{{ playbook_dir }}/config_host.yml"
       tags:
         - always
     - name: Set ansible_distribution to Ubuntu
@@ -22,7 +19,6 @@
 
   roles:
     - role: geerlingguy.docker
-      when: install_docker
       become: true
       tags:
         - docker
@@ -56,45 +52,21 @@
   tasks:
     - name: Set .zshrc
       import_tasks: tasks/zshrc.yml
-      when: configure_zshrc
       tags:
         - zshrc
         - zsh
 
-    - name: Install NVM
-      import_tasks: tasks/nvm.yml
-      when: install_nvm
-      tags:
-        - node
-        - nvm
-
     - name: Install kubectl
       import_tasks: tasks/kubectl.yml
-      when: install_kubectl
       become: true
       tags:
         - kubectl
         - k8s
 
-    - name: Install extra packages
-      import_tasks: tasks/extra-packages.yml
+    - name: Install packages
+      import_tasks: tasks/packages.yml
       tags:
         - packages
-
-    - name: Install flatpaks
-      import_tasks: tasks/flatpak.yml
-      tags:
-        - flatpak
-
-    - name: Install snaps
-      import_tasks: tasks/snap.yml
-      tags:
-        - snap
-
-    - name: Install alacritty
-      import_tasks: tasks/alacritty.yml
-      tags:
-        - alacritty
 
     - name: Install ssh keys
       import_tasks: tasks/ssh.yml

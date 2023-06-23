@@ -2,12 +2,11 @@
 downloads: ~/.ansible-downloads/
 
 # Docker
-install_docker: false
-docker_compose_version: "1.28.0"
+docker_install_compose: false
+docker_install_compose_plugin: true
 docker_users: ["{{ ansible_env.USER }}"]
 
 # ZSH
-install_zsh: true
 antigen_users:
   - username: "{{ ansible_env.USER }}"
     antigen_libraries:
@@ -29,11 +28,32 @@ antigen_bundle_users:
       - name: zsh-syntax-highlighting
         url: zsh-users/zsh-syntax-highlighting
 
-configure_zshrc: true
+# Powerline fonts
+powerline_fonts:
+  - SourceCodePro
 
-# K8s
-install_kubectl: true
+# Nerd fonts
+nf_user: "{{ ansible_env.USER }}"
+nf_group: "{{ nf_user }}"
+nf_single_fonts:
+  - "FiraCode/Regular/FiraCodeNerdFont-Regular.ttf"
 
-# Node
-install_nvm: true
+# Install packages.
+flatpak_packages:
+  - name: com.visualstudio.code
 
+pip_packages:
+  - name: psutil
+
+deb_packages:
+  - name: "https://github.com/twpayne/chezmoi/releases/download/v2.34.0/chezmoi_2.34.0_linux_amd64.deb"
+
+apt_packages:
+  - name: snapd
+  - name: neofetch
+  - name: alacritty
+
+snap_packages: []
+  # - name: distrobox
+  #   state: present
+  #   channel: stable

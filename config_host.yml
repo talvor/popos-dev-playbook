@@ -6,28 +6,6 @@ docker_install_compose: false
 docker_install_compose_plugin: true
 docker_users: ["{{ ansible_env.USER }}"]
 
-# ZSH
-antigen_users:
-  - username: "{{ ansible_env.USER }}"
-    antigen_libraries:
-      - name: oh-my-zsh
-    antigen_theme:
-      name: robbyrussell
-    antigen_bundles:
-      - name: command-not-found
-      - name: git
-      - name: nvm
-      - name: kubectl
-antigen_bundle_users:
-  - username: "{{ ansible_env.USER }}"
-    antigen_bundles:
-      - name: zsh-completions
-        url: zsh-users/zsh-completions
-      - name: zsh-autosuggestions
-        url: zsh-users/zsh-autosuggestions
-      - name: zsh-syntax-highlighting
-        url: zsh-users/zsh-syntax-highlighting
-
 # Powerline fonts
 powerline_fonts:
   - SourceCodePro

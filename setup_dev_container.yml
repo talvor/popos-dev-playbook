@@ -43,6 +43,11 @@
         - zshrc
         - zsh
 
+    - name: Install nvm
+      import_tasks: tasks/nvm.yml
+      tags:
+        - nvm
+
     - name: Install kubectl
       import_tasks: tasks/kubectl.yml
       become: true

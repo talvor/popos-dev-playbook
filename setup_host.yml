@@ -23,11 +23,9 @@
       tags:
         - docker
     - role: sicruse.powerline-fonts
-      when: install_powerline_fonts
       tags:
         - fonts
     - role: ctorgalson.nerdfonts
-      when: install_nerd_fonts
       tags:
         - fonts
 

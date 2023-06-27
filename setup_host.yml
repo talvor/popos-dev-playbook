@@ -22,20 +22,6 @@
       become: true
       tags:
         - docker
-    - role: gantsign.antigen
-      when: install_zsh
-      become: true
-      users: "{{antigen_users}}"
-      tags:
-        - zsh
-        - antigen
-    - role: gantsign.antigen_bundles
-      when: install_zsh
-      become: true
-      users: "{{antigen_bundle_users}}"
-      tags:
-        - zsh
-        - antigen_bundles
     - role: sicruse.powerline-fonts
       when: install_powerline_fonts
       tags:
@@ -44,25 +30,8 @@
       when: install_nerd_fonts
       tags:
         - fonts
-    - role: andrewrothstein.starship
-      when: install_starship
-      tags:
-        - starship
 
   tasks:
-    - name: Set .zshrc
-      import_tasks: tasks/zshrc.yml
-      tags:
-        - zshrc
-        - zsh
-
-    - name: Install kubectl
-      import_tasks: tasks/kubectl.yml
-      become: true
-      tags:
-        - kubectl
-        - k8s
-
     - name: Install packages
       import_tasks: tasks/packages.yml
       tags:

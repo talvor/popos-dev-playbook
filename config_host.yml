@@ -30,6 +30,7 @@ apt_packages:
   - name: snapd
   - name: neofetch
   - name: alacritty
+  - name: htop
 
 snap_packages: []
   # - name: distrobox

@@ -17,14 +17,15 @@ nf_single_fonts:
   - "FiraCode/Regular/FiraCodeNerdFont-Regular.ttf"
 
 # Install packages.
-flatpak_packages:
-  - name: com.visualstudio.code
+flatpak_packages: []
+  # - name: com.visualstudio.code
 
 pip_packages:
   - name: psutil
 
 deb_packages:
   - name: "https://github.com/twpayne/chezmoi/releases/download/v2.34.0/chezmoi_2.34.0_linux_amd64.deb"
+  - name: "https://az764295.vo.msecnd.net/stable/695af097c7bd098fbf017ce3ac85e09bbc5dda06/code_1.79.2-1686734195_amd64.deb"
 
 apt_packages:
   - name: snapd

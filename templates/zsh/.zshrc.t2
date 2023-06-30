@@ -11,13 +11,18 @@ eval "$(starship init zsh)"
 # Aliases
 
 if command -v "distrobox" > /dev/null; then
-    alias code='flatpak run com.visualstudio.code &>/dev/null'
+    alias code='/usr/bin/code &>/dev/null'
 else
-    alias code='distrobox-host-exec flatpak run com.visualstudio.code &>/dev/null'
+    alias code='distrobox-host-exec /usr/bin/code &>/dev/null'
 fi
 
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='nano'
 else
   export EDITOR='code'
+fi
+
+# Go Lang
+if [ -d "/usr/local/go/bin" ] ; then
+    PATH="$PATH:/usr/local/go/bin"
 fi

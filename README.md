@@ -32,6 +32,35 @@ $ git clone https://github.com/talvor/popos-dev-playbook.git
 
 1. Restart your machine.
 
+## Distrobox check
+
+Version 1.5.0 of distrobox has a bug that stops apt-get from working, so lets check the version of distrobox.
+
+```shell
+$ distrobox version
+```
+
+If the version is `1.5.0`, follow these steps;
+
+1. Download the install script
+
+```shell
+$ curl -o ./distrobox_install.sh https://raw.githubusercontent.com/89luca89/distrobox/main/install
+$ chmod a+x ./distrobox_install.sh
+```
+
+1. Update the version number
+
+```shell
+$ nano ./distrobox_install.sh
+```
+Change `version=1.5.0` => `version=1.5.0.2` and save.
+
+1. Run install
+
+```shell
+$ sudo ./distrobox_install.sh
+```
 
 ## Setting up development container
 
@@ -55,6 +84,9 @@ $ git clone https://github.com/talvor/popos-dev-playbook.git
    ```shell
    $ ansible-playbook setup_dev_container.yml --ask-become-pass
    ```
+
+## Post install steps
+
 
 ## Author
 

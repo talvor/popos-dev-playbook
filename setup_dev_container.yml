@@ -32,10 +32,6 @@
         - zsh
         - antigen_bundles
 
-    - role: andrewrothstein.starship
-      tags:
-        - starship
-
     - role: gantsign.golang
       become: true
       golang_install_dir: /usr/local/go

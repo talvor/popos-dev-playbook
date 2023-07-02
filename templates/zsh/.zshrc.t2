@@ -5,16 +5,8 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-# Setup starship
-eval "$(starship init zsh)"
-
 # Aliases
 
-if command -v "distrobox" > /dev/null; then
-    alias code='/usr/bin/code &>/dev/null'
-else
-    alias code='distrobox-host-exec /usr/bin/code &>/dev/null'
-fi
 
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='nano'

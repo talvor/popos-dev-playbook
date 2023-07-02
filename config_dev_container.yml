@@ -32,6 +32,7 @@ deb_packages:
 apt_packages:
   - name: neofetch
   - name: htop
+  - name: nano
 
 snap_packages: []
   # - name: distrobox

@@ -20,16 +20,18 @@ antigen_bundle_users:
         url: zsh-users/zsh-autosuggestions
       - name: zsh-syntax-highlighting
         url: zsh-users/zsh-syntax-highlighting
-        
+
 # Install packages.
 flatpak_packages: []
 
 pip_packages: []
 
-deb_packages: []
+deb_packages:
+  - name: "https://az764295.vo.msecnd.net/stable/695af097c7bd098fbf017ce3ac85e09bbc5dda06/code_1.79.2-1686734195_amd64.deb"
 
 apt_packages:
   - name: neofetch
+  - name: htop
 
 snap_packages: []
   # - name: distrobox

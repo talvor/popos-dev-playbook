@@ -39,8 +39,27 @@
     - role: gantsign.golang
       become: true
       golang_install_dir: /usr/local/go
+      golang_gopath: "{{ lookup('env','HOME') }}/development/go"
 
   tasks:
+    - name: Create go development directory if it does not exist
+      ansible.builtin.file:
+        path: "{{ lookup('env','HOME') }}/development/go"
+        state: directory
+        mode: '0755'
+
+    - name: Create node development directory if it does not exist
+      ansible.builtin.file:
+        path: "{{ lookup('env','HOME') }}/development/node"
+        state: directory
+        mode: '0755'
+
+    - name: Create dotnet development directory if it does not exist
+      ansible.builtin.file:
+        path: "{{ lookup('env','HOME') }}/development/dotnet"
+        state: directory
+        mode: '0755'
+
     - name: Set .zshrc
       import_tasks: tasks/zshrc.yml
       tags:

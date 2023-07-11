@@ -37,6 +37,9 @@
       golang_install_dir: /usr/local/go
       golang_gopath: "{{ lookup('env','HOME') }}/development/go"
 
+    - role: gantsign.helm
+      become: true
+
   tasks:
     - name: Create go development directory if it does not exist
       ansible.builtin.file:

@@ -11,6 +11,7 @@ antigen_users:
       - name: git
       - name: nvm
       - name: kubectl
+      - name: helm
 antigen_bundle_users:
   - username: "{{ ansible_env.USER }}"
     antigen_bundles:

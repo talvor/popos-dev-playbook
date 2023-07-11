@@ -87,6 +87,13 @@ $ sudo ./distrobox_install.sh
 
 ## Post install steps
 
+### Setup access to remote kubernetes cluster
+```shell
+$ distrbox enter dev
+$ mkdir ~/.kube
+$ scp -r rancher@192.168.1.220:/etc/rancher/k3s/k3s.yaml ~/.kube/config
+$ sed -i 's/127.0.0.1/192.168.1.220/' ~/.kube/config
+```
 
 ## Author
 

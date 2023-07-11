@@ -6,6 +6,7 @@ roles:
   - name: sicruse.powerline-fonts
   - name: ctorgalson.nerdfonts
   - name: gantsign.golang
+  - name: gantsign.helm
 
 collections:
   - name: community.general

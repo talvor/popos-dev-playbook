@@ -1,0 +1,22 @@
+http:
+  # Add the router
+  routers:
+    plex:
+      entryPoints:
+        - web
+      rule: Host(`plex.talvor.io`)
+      service: plex-srv
+
+    plex-secure:
+      entryPoints:
+        - websecure
+      service: plex-srv
+      rule: Host(`plex.talvor.io`)
+      tls: true
+
+  # Add the service
+  services:
+    plex-srv:
+      loadBalancer:
+        servers:
+          - url: http://192.168.1.10:32400/

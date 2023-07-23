@@ -1,0 +1,22 @@
+http:
+  # Add the router
+  routers:
+    unraid:
+      entryPoints:
+        - web
+      rule: Host(`unraid.talvor.io`)
+      service: unraid-srv
+
+    unraid-secure:
+      entryPoints:
+        - websecure
+      service: unraid-srv
+      rule: Host(`unraid.talvor.io`)
+      tls: true
+
+  # Add the service
+  services:
+    unraid-srv:
+      loadBalancer:
+        servers:
+          - url: http://192.168.1.10:81/

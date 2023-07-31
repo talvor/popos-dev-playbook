@@ -57,3 +57,10 @@ $ docker stack deploy --compose-file ./portainer/portainer.yml portainer
 $ ssh root@docker.talvor.io
 $ docker stack deploy --compose-file ./whoami/whoami.yml whoami
 ```
+
+## Setting up Gitlab
+### Deploy stack
+```shell
+$ ssh root@docker.talvor.io
+$ docker stack deploy --compose-file ./gitlab/gitlab-swarm.yml gitlab
+```

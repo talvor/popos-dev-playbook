@@ -1,0 +1,69 @@
+version: "3.6"
+services:
+  app:
+    image: gitlab/gitlab-ce:latest
+    hostname: 'gitlab.talvor.io'
+    volumes:
+      - /mnt/user/gitlab/data:/var/opt/gitlab
+      - /mnt/user/gitlab/logs:/var/log/gitlab
+      - /mnt/user/gitlab/config:/etc/gitlab
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'https://gitlab.talvor.io'
+        nginx['listen_https'] = false
+        nginx['listen_port'] = 80
+        nginx['redirect_http_to_https'] = false
+        letsencrypt['enable'] = false
+        gitlab_rails['gitlab_shell_ssh_port'] = 4022
+        # Add any other gitlab.rb configuration here, each on its own line
+    networks:
+      - traefik-public
+    healthcheck:
+      interval: 10m
+    deploy:
+      placement:
+        constraints:
+          - node.labels.gitlab == true
+      labels:
+      - traefik.enable=true
+      - traefik.http.routers.gitlab.rule=Host(`gitlab.talvor.io`)
+      - traefik.http.routers.gitlab.entrypoints=websecure
+      - traefik.http.routers.gitlab.service=gitlab
+      - traefik.http.services.gitlab.loadbalancer.server.port=80
+
+      # Can't filter TCP traffic on SNI, see link below
+      # https://community.containo.us/t/routing-ssh-traffic-with-traefik-v2/717/6
+      - traefik.tcp.routers.gitlab-ssh.entrypoints=ssh-gitlab
+      - traefik.tcp.routers.gitlab-ssh.rule=HostSNI(`*`)
+      - traefik.tcp.routers.gitlab-ssh.service=gitlab-ssh-svc
+
+      - traefik.tcp.services.gitlab-ssh-svc.loadbalancer.server.port=22
+
+  runner:
+    image: gitlab/gitlab-runner:alpine
+    environment:
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    command: run -n --tag-list docker,test --run-untagged=true --locked=false --executor docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    configs:
+      - source: gitlab
+        target: /etc/gitlab-runner/config.toml
+    deploy:
+      placement:
+        constraints:
+          - "node.role==worker"
+      mode: replicated
+      replicas: 1
+      restart_policy:
+          condition: any
+      update_config:
+          parallelism: 1
+
+configs:
+  gitlab:
+      external: true
+
+networks:
+  traefik-public:
+    external: true

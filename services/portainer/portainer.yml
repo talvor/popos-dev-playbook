@@ -23,7 +23,7 @@ services:
     image: portainer/portainer-ce:latest
     command: -H tcp://tasks.agent:9001 --tlsskipverify
     volumes:
-      - /shared/portainer:/data
+      - /mnt/share/portainer:/data
     networks:
       - traefik-public
       - agent_network

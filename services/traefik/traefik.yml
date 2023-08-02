@@ -35,7 +35,6 @@ services:
       - --entrypoints.ssh-gitlab.address=:4022
       # Setup logging
       - --log.level=DEBUG
-      - --accesslog=true
     environment:
       - CLOUDFLARE_EMAIL=talvor@me.com
       - CLOUDFLARE_DNS_API_TOKEN=${CF_API_KEY}

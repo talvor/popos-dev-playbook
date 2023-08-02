@@ -64,3 +64,10 @@ $ docker stack deploy --compose-file ./whoami/whoami.yml whoami
 $ ssh root@docker.talvor.io
 $ docker stack deploy --compose-file ./gitlab/gitlab-swarm.yml gitlab
 ```
+
+## Setting up Unifi Controller
+### Deploy stack
+```shell
+$ ssh root@docker.talvor.io
+$ docker stack deploy --compose-file ./unifi-controller/unifi-swarm.yml unifi
+```

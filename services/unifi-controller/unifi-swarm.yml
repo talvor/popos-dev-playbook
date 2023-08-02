@@ -1,0 +1,49 @@
+version: "3.7"
+services:
+  app:
+    image: linuxserver/unifi-controller
+    ports:
+      - target: 3478
+        published: 3478
+        protocol: udp
+        mode: host
+      - target: 10001
+        published: 10001
+        protocol: udp
+        mode: host
+      - target: 8080
+        published: 8080
+        protocol: tcp
+        mode: host
+      - target: 6789
+        published: 6789
+        protocol: tcp
+        mode: host
+    networks:
+      - traefik-public
+    volumes:
+      - unifi-volume:/config
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MEM_LIMIT=1024
+    deploy:
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: [node.hostname == docker-worker1]
+      labels:
+      - traefik.enable=true
+      - traefik.http.routers.unifi.entrypoints=websecure
+      - traefik.http.routers.unifi.rule=Host(`unifi2.talvor.io`)
+      - traefik.http.routers.unifi.tls=true
+      - traefik.http.routers.unifi.service=unifi
+      - traefik.http.services.unifi.loadbalancer.server.port=8443
+      - traefik.http.services.unifi.loadbalancer.server.scheme=https
+
+networks:
+  traefik-public:
+    external: true
+
+volumes:
+  unifi-volume:

@@ -28,6 +28,18 @@
     - role: ctorgalson.nerdfonts
       tags:
         - fonts
+    - role: gantsign.antigen
+      become: true
+      users: "{{antigen_users}}"
+      tags:
+        - zsh
+        - antigen
+    - role: gantsign.antigen_bundles
+      become: true
+      users: "{{antigen_bundle_users}}"
+      tags:
+        - zsh
+        - antigen_bundles
 
   tasks:
     - name: Install packages
@@ -57,3 +69,9 @@
       import_tasks: tasks/distrobox.yml
       tags:
         - distrobox
+
+    - name: Set .zshrc
+      import_tasks: tasks/zshrc.yml
+      tags:
+        - zshrc
+        - zsh

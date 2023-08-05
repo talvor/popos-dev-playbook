@@ -5,7 +5,7 @@ antigen_users:
     antigen_libraries:
       - name: oh-my-zsh
     antigen_theme:
-      name: robbyrussell
+      name: a
     antigen_bundles:
       - name: command-not-found
       - name: git

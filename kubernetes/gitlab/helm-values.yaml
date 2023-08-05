@@ -1,26 +1,2 @@
 gitlabUrl: https://gitlab.talvor.io/
 runnerToken: _mhx-423bdcUagqqJRqB
-
-
-docker run -d \
-    --name gitlab-runner \
-    --restart always \
-    -v gitlab-runner:/etc/gitlab-runner \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    gitlab/gitlab-runner:latest
-
-docker exec -it gitlab-runner bash
-
-
-export GITLAB_URL=https://gitlab.talvor.io/
-export GITLAB_TOKEN=_mhx-423bdcUagqqJRqB
-
-
-gitlab-runner \
-    register -n \
-    --name "Docker Runner" \
-    --executor docker \
-    --docker-image docker:latest \
-    --docker-volumes /var/run/docker.sock:/var/run/docker.sock \
-    --url $GITLAB_URL \
-    --registration-token $GITLAB_TOKEN

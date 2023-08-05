@@ -1,6 +1,33 @@
 ---
 downloads: ~/.ansible-downloads/
 
+# ZSH
+antigen_users:
+  - username: "{{ ansible_env.USER }}"
+    antigen_libraries:
+      - name: oh-my-zsh
+    antigen_theme:
+      name: agnoster
+    antigen_bundles:
+      - name: command-not-found
+      - name: docker
+      - name: git
+      - name: nvm
+      - name: kubectl
+      - name: helm
+      - name: tmux
+      - name: thefuck
+
+antigen_bundle_users:
+  - username: "{{ ansible_env.USER }}"
+    antigen_bundles:
+      - name: zsh-completions
+        url: zsh-users/zsh-completions
+      - name: zsh-autosuggestions
+        url: zsh-users/zsh-autosuggestions
+      - name: zsh-syntax-highlighting
+        url: zsh-users/zsh-syntax-highlighting
+
 # Docker
 docker_install_compose: false
 docker_install_compose_plugin: true
@@ -25,12 +52,15 @@ pip_packages:
 
 deb_packages:
   - name: "https://github.com/twpayne/chezmoi/releases/download/v2.34.0/chezmoi_2.34.0_linux_amd64.deb"
+  - name: "https://launchpad.net/~neovim-ppa/+archive/ubuntu/unstable/+files/neovim-runtime_0.10.0~ubuntu1+git202308040947-cc87dda31-9b397864c-3688d4aa7~ubuntu22.04.1_all.deb"
+  - name: "https://launchpad.net/~neovim-ppa/+archive/ubuntu/unstable/+files/neovim_0.10.0~ubuntu1+git202308040947-cc87dda31-9b397864c-3688d4aa7~ubuntu22.04.1_amd64.deb"
 
 apt_packages:
   - name: snapd
   - name: neofetch
-  - name: alacritty
   - name: htop
+  - name: kitty
+  - name: tmux
 
 snap_packages: []
   # - name: distrobox

@@ -1,68 +1,28 @@
 ---
 downloads: ~/.ansible-downloads/
 
-# ZSH
-antigen_users:
-  - username: "{{ ansible_env.USER }}"
-    antigen_libraries:
-      - name: oh-my-zsh
-    antigen_theme:
-      name: agnoster
-    antigen_bundles:
-      - name: command-not-found
-      - name: docker
-      - name: git
-      - name: nvm
-      - name: kubectl
-      - name: helm
-      - name: tmux
-      - name: thefuck
-
-antigen_bundle_users:
-  - username: "{{ ansible_env.USER }}"
-    antigen_bundles:
-      - name: zsh-completions
-        url: zsh-users/zsh-completions
-      - name: zsh-autosuggestions
-        url: zsh-users/zsh-autosuggestions
-      - name: zsh-syntax-highlighting
-        url: zsh-users/zsh-syntax-highlighting
-
-# Docker
-docker_install_compose: false
-docker_install_compose_plugin: true
-docker_users: ["{{ ansible_env.USER }}"]
-
-# Powerline fonts
-powerline_fonts:
-  - SourceCodePro
-
 # Nerd fonts
 nf_user: "{{ ansible_env.USER }}"
 nf_group: "{{ nf_user }}"
 nf_single_fonts:
   - "FiraCode/Regular/FiraCodeNerdFont-Regular.ttf"
+  - "FiraCode/Regular/FiraCodeNerdFontMono-Regular.ttf"
+  - "JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFontMono-Regular.ttf"
 
 # Install packages.
-flatpak_packages: []
-  # - name: com.visualstudio.code
+flatpak_packages:
+  - name: com.brave.Browser
+  - name: com.visualstudio.code
 
 pip_packages:
   - name: psutil
 
-deb_packages:
-  - name: "https://github.com/twpayne/chezmoi/releases/download/v2.34.0/chezmoi_2.34.0_linux_amd64.deb"
-  - name: "https://launchpad.net/~neovim-ppa/+archive/ubuntu/unstable/+files/neovim-runtime_0.10.0~ubuntu1+git202308040947-cc87dda31-9b397864c-3688d4aa7~ubuntu22.04.1_all.deb"
-  - name: "https://launchpad.net/~neovim-ppa/+archive/ubuntu/unstable/+files/neovim_0.10.0~ubuntu1+git202308040947-cc87dda31-9b397864c-3688d4aa7~ubuntu22.04.1_amd64.deb"
+deb_packages: []
 
 apt_packages:
-  - name: snapd
   - name: neofetch
   - name: htop
   - name: kitty
-  - name: tmux
 
 snap_packages: []
-  # - name: distrobox
-  #   state: present
-  #   channel: stable
+

@@ -23,6 +23,7 @@ apt_packages:
   - name: neofetch
   - name: htop
   - name: kitty
+  - name: stow
 
 snap_packages: []
 

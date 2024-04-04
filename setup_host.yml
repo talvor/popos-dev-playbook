@@ -23,6 +23,11 @@
         - fonts
 
   tasks:
+    - name: Install docker
+      import_tasks: tasks/docker.yml
+      tags:
+        - docker
+
     - name: Install packages
       import_tasks: tasks/packages.yml
       tags:

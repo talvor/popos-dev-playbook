@@ -1,0 +1,10 @@
+neofetch
+kitty-terminfo
+neovim
+fzf
+ripgrep
+gcc
+gcc-c++
+make
+tmux
+zsh
